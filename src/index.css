@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+/* 🌏 THE GLOBAL CANVAS */
+.global-map-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.15;
+  filter: grayscale(1) brightness(1.2);
+  pointer-events: none;
+}
+
+/* 🇳🇬 THE NIGERIA SHAPE MASK */
+/* This is the secret to the 'No Box' look */
+.nigeria-shape-mask {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: transparent;
+  /* We use a high-contrast shadow and no borders to make it pop */
+  filter: drop-shadow(0 0 30px rgba(30, 94, 188, 0.2)); 
+}
+
+/* Remove the default gray background of Leaflet */
+.leaflet-container {
+  background: transparent !important;
+  outline: none;
+}
+
+/* Custom Scrollbar for the Middle List */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* This makes the Leaflet popup look like your UI cards */
+.custom-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+}
+
