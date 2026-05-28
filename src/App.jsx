@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
 import Dashboard from "./pages/Dashboard";
 import Hospitals from "./pages/Hospitals"; // Your new page
+import ColdChainDashboard from "./pages/ColdChainDashboard";
 // Import your persistent/layout components
 // (Ensure these are also moved to a /components folder for cleanliness)
 import Navbar from "./components/Navbar"; 
@@ -28,6 +29,8 @@ export default function HealthLogixWebsite() {
         {activeTab === "ceo-dashboard" && <Dashboard />}
         {activeTab === "hospitals" && <Hospitals />}
         
+        {activeTab === "cold-chain" && <ColdChainDashboard />}
+
         {/* These can stay here if you prefer them as "tabs" rather than full pages */}
         {activeTab === "tracking" && <LogisticsTracking />}
         {activeTab === "login" && (

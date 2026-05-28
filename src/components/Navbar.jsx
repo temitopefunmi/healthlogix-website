@@ -19,6 +19,7 @@ function Navbar({ role, setRole, setActiveTab }) {
           <button onClick={() => setActiveTab("home")} className="text-sm font-medium hover:text-emerald-600 text-slate-600">Home</button>
           <button onClick={() => setActiveTab("marketplace")} className="text-sm font-medium hover:text-emerald-600 text-slate-600">Marketplace</button>
           <button onClick={() => setActiveTab("hospitals")} className="text-sm font-medium hover:text-emerald-600 text-slate-600">Hospitals</button>
+          <button onClick={() => setActiveTab("cold-chain")} className="text-sm font-medium hover:text-emerald-600 text-slate-600">Cold Chain</button>
           <button onClick={() => setActiveTab("tracking")} className="text-sm font-medium hover:text-emerald-600 text-slate-600 flex items-center gap-1.5">
             <Truck size={16} /> Track
           </button>
@@ -45,6 +46,7 @@ function Navbar({ role, setRole, setActiveTab }) {
           <button onClick={() => { setActiveTab("home"); setIsOpen(false); }} className="text-left text-sm font-medium">Home</button>
           <button onClick={() => { setActiveTab("marketplace"); setIsOpen(false); }} className="text-left text-sm font-medium">Marketplace</button>
           <button onClick={() => { setActiveTab("hospitals"); setIsOpen(false); }} className="text-left text-sm font-medium">Hospitals</button>
+          <button onClick={() => { setActiveTab("cold-chain"); setIsOpen(false); }} className="text-left text-sm font-medium">Cold Chain</button>
           <button onClick={() => { setActiveTab("tracking"); setIsOpen(false); }} className="text-left text-sm font-medium">Track Package</button>
           <button onClick={() => { setActiveTab("ceo-dashboard"); setIsOpen(false); }} className="text-left text-sm font-bold text-emerald-600">CEO Dashboard</button>
           <Button onClick={() => { setActiveTab("login"); setIsOpen(false); }} className="w-full">Institutional Login</Button>

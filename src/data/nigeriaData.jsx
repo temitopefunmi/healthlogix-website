@@ -68,7 +68,41 @@ const nigeriaData = {
   "Nasarawa": { "Lafia": [] },
   "Niger": { "Minna": [] },
   "Ogun": { "Abeokuta North": [] },
-  "Ondo": { "Akure": [] },
+  "Ondo": { "Akure": [
+    {
+      name: "Ondo State Specialist Hospital",
+      beds: 30,
+      icu: 6,
+      lab: true,
+      drugs: ["Amoxicillin", "Paracetamol"],
+      type: "State",
+      lat: 7.2500,
+      lng: 5.2000
+    },
+    {
+      name: "ETON medical center",
+      beds: 7,
+      icu: 1,
+      lab: false,
+      drugs: ["Ibuprofen"],
+      type: "Private",
+      lat: 7.2500,
+      lng: 5.2100
+    }
+  ],
+  "Ondo": [
+    {
+      name: "University of Medical Sciences Teaching Hospital",
+      beds: 30,
+      icu: 6,
+      lab: true,
+      drugs: ["Amoxicillin", "Paracetamol"],
+      type: "Teaching",
+      lat: 7.2500,
+      lng: 5.2000
+    }
+  ]
+ },
   "Osun": { "Osogbo": [] },
   "Oyo": {
     "Ibadan North": [
