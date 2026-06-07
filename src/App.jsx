@@ -2,6 +2,8 @@ import React, { useState } from "react";
 // Import your decoupled pages
 import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Hospitals from "./pages/Hospitals"; // Your new page
 import ColdChainDashboard from "./pages/ColdChainDashboard";
@@ -22,9 +24,10 @@ export default function HealthLogixWebsite() {
       {/* Persists on every page */}
       <Navbar setRole={setRole} role={role} setActiveTab={setActiveTab} />
       
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Page Routing Logic */}
         {activeTab === "home" && <Home setActiveTab={setActiveTab} />}
+        {activeTab === "about" && <About />}
         {activeTab === "marketplace" && <Marketplace />}
         {activeTab === "ceo-dashboard" && <Dashboard />}
         {activeTab === "hospitals" && <Hospitals />}
@@ -33,6 +36,7 @@ export default function HealthLogixWebsite() {
 
         {/* These can stay here if you prefer them as "tabs" rather than full pages */}
         {activeTab === "tracking" && <LogisticsTracking />}
+        {activeTab === "contact" && <Contact />}
         {activeTab === "login" && (
           <LoginSection setRole={(r) => { setRole(r); setActiveTab("home"); }} />
         )}

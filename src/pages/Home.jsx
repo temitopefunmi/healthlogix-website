@@ -1,76 +1,143 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { 
-  ShieldCheck, 
-  Search, 
-  Truck, 
-  Activity, 
-  Database, 
-  Users, 
-  AlertCircle, 
-  ChevronRight, 
-  Store 
+import React from "react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  Building2,
+  CheckCircle2,
+  CircleDollarSign,
+  Gauge,
+  Hospital,
+  Leaf,
+  MapPin,
+  Microscope,
+  Play,
+  ShieldCheck,
+  Snowflake,
+  Sun,
+  Wrench,
+  Zap,
 } from "lucide-react";
 import { Button } from "../components/ui/Button";
-import { Card, CardContent } from "../components/ui/Card";
+
+const services = [
+  {
+    icon: <Snowflake size={34} />,
+    title: "Cold Chain Monitoring",
+    description: "Real-time temperature, humidity, power and cold-room monitoring across healthcare facilities, laboratories and vaccine storage systems.",
+    color: "from-blue-500 to-blue-700",
+  },
+  {
+    icon: <BadgeCheck size={34} />,
+    title: "Calibration & Traceability",
+    description: "ISO/IEC 17025-aligned calibration, equipment verification, uncertainty analysis and QR-code traceability for regulated assets.",
+    color: "from-emerald-500 to-green-700",
+  },
+  {
+    icon: <Leaf size={34} />,
+    title: "ESG & Sustainability",
+    description: "ESG dashboards, energy analytics, carbon learning, asset monitoring and sustainability intelligence for healthcare systems.",
+    color: "from-amber-500 to-yellow-700",
+  },
+];
+
+const stats = [
+  { icon: <MapPin size={28} />, value: "774", label: "LGAs Coverage", color: "text-blue-400" },
+  { icon: <Hospital size={28} />, value: "36+", label: "States + FCT", color: "text-blue-400" },
+  { icon: <Zap size={28} />, value: "24/7", label: "Live Monitoring", color: "text-blue-400" },
+  { icon: <ShieldCheck size={28} />, value: "ISO", label: "Compliance Driven", color: "text-amber-400" },
+];
+
+const trustPoints = [
+  {
+    title: "Nationwide Monitoring Infrastructure",
+    description: "Designed for improving healthcare systems across all 36 states, FCT and 774 LGAs.",
+  },
+  {
+    title: "ISO Compliance & Traceability",
+    description: "Supporting calibration compliance, audit readiness and healthcare quality systems.",
+  },
+  {
+    title: "ESG-Driven Healthcare Intelligence",
+    description: "Combining healthcare assurance, sustainability analytics and digital infrastructure.",
+  },
+];
+
+const impactMetrics = [
+  { icon: <CircleDollarSign size={30} />, title: "Vaccine Waste Prevented", value: "₦48.5M", detail: "Estimated Value", tone: "text-emerald-300" },
+  { icon: <Sun size={30} />, title: "Solar Sites Monitored", value: "6,234", detail: "Across Nigeria", tone: "text-emerald-200" },
+  { icon: <BarChart3 size={30} />, title: "Calibration Compliance", value: "95.8%", detail: "National Average", tone: "text-cyan-200" },
+  { icon: <Building2 size={30} />, title: "Healthcare Facilities", value: "8,492", detail: "Monitored Facilities", tone: "text-blue-200" },
+];
 
 export default function Home({ setActiveTab }) {
   return (
-    <>
+    <div className="min-h-screen bg-[#020b18] text-white overflow-hidden">
       <HeroSection setActiveTab={setActiveTab} />
       <ServicesSection />
-      <PlatformCapabilities />
-      <MarketplacePreview setActiveTab={setActiveTab} />
-      <InvestorSection />
-      <CTASection />
-    </>
+      <TrustSection />
+      <CallToAction setActiveTab={setActiveTab} />
+    </div>
   );
 }
 
-// -----------------------------
-// SUB-COMPONENTS
-// -----------------------------
+function NetworkBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(35,111,186,0.35),transparent_30%),radial-gradient(circle_at_50%_16%,rgba(36,155,118,0.14),transparent_24%),linear-gradient(135deg,#030b18_0%,#06203b_48%,#031025_100%)]" />
+      <div className="absolute right-[-8%] top-[18%] w-[48rem] h-[48rem] rounded-full border border-blue-400/10 shadow-[0_0_90px_rgba(59,130,246,0.18)]" />
+      <div className="absolute right-[-3%] top-[28%] w-[34rem] h-[34rem] rounded-full border border-blue-300/10" />
+      <div className="absolute left-[44%] top-8 h-80 w-80 opacity-30">
+        <div className="absolute left-8 top-7 h-1.5 w-1.5 rounded-full bg-blue-300" />
+        <div className="absolute left-28 top-24 h-1.5 w-1.5 rounded-full bg-blue-300" />
+        <div className="absolute left-44 top-6 h-1.5 w-1.5 rounded-full bg-cyan-300" />
+        <div className="absolute left-64 top-32 h-1.5 w-1.5 rounded-full bg-blue-300" />
+        <div className="absolute left-24 top-48 h-1.5 w-1.5 rounded-full bg-blue-300" />
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 320 320" fill="none">
+          <path d="M40 36 112 96 176 32 264 136 120 196 40 36Z" stroke="rgba(125, 211, 252, 0.22)" />
+          <path d="M112 96 120 196 176 32" stroke="rgba(125, 211, 252, 0.16)" />
+        </svg>
+      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20" />
+    </div>
+  );
+}
 
 function HeroSection({ setActiveTab }) {
-  const [trackId, setTrackId] = useState("");
-
-  const handleTrack = (e) => {
-    e.preventDefault();
-    if (trackId.trim()) setActiveTab("tracking");
-  };
-
   return (
-    <section className="relative overflow-hidden bg-emerald-950 text-white py-24 px-6">
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="inline-flex items-center gap-2 bg-emerald-900/50 border border-emerald-800 px-3 py-1 rounded-full text-emerald-400 text-sm mb-8"
-        >
-          <ShieldCheck size={14} /> 
-          <span>Nigeria's Verified Healthcare Infrastructure Exchange</span>
-        </motion.div>
-        
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
-          Securing the Vitals of <span className="text-emerald-400">Healthcare Logistics</span>
-        </h1>
-        
-        <form onSubmit={handleTrack} className="max-w-md mx-auto mb-10 flex p-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl">
-          <input 
-            type="text" 
-            placeholder="Enter Tracking ID (e.g. HLX-2901)" 
-            className="bg-transparent border-none outline-none flex-grow px-4 text-white text-sm placeholder:text-emerald-200/50" 
-            value={trackId} 
-            onChange={(e) => setTrackId(e.target.value)} 
-          />
-          <Button type="submit" className="rounded-xl px-4 py-2 flex items-center gap-2 shadow-lg">
-            <Search size={16} /> Track
-          </Button>
-        </form>
+    <section className="relative min-h-[720px] pt-24 pb-16 px-6 flex items-center">
+      <NetworkBackground />
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
+            Transforming <span className="block bg-gradient-to-r from-cyan-500 via-emerald-400 to-lime-500 bg-clip-text text-transparent">Healthcare Assurance</span>
+            Across Africa
+          </h1>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button onClick={() => setActiveTab("login")} className="px-8 py-4 text-lg rounded-2xl shadow-xl shadow-emerald-900/40">Get Started</Button>
-          <Button variant="secondary" onClick={() => setActiveTab("ceo-dashboard")} className="px-8 py-4 text-lg rounded-2xl">CEO Overview</Button>
+          <p className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto mb-8">
+            We deliver end-to-end solutions in cold chain monitoring, calibration traceability, ESG intelligence, preventive maintenance and digital healthcare infrastructure for a safer, healthier tomorrow.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+            <Button onClick={() => setActiveTab("cold-chain")} className="bg-emerald-500 hover:bg-emerald-400 px-8 py-4 rounded-lg text-base flex items-center justify-center gap-3 shadow-xl shadow-emerald-950/30">
+              Explore Our Solutions <ArrowRight size={18} />
+            </Button>
+            <Button variant="outline" onClick={() => setActiveTab("tracking")} className="border-white/60 text-white hover:bg-white/10 px-8 py-4 rounded-lg text-base flex items-center justify-center gap-3">
+              <Play size={18} /> Watch Demo
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="mx-auto h-16 w-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-3 text-emerald-400 shadow-xl shadow-blue-950/30">
+                  {stat.icon}
+                </div>
+                <div className={`text-3xl font-black ${stat.color}`}>{stat.value}</div>
+                <div className="text-sm text-slate-300">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -78,140 +145,25 @@ function HeroSection({ setActiveTab }) {
 }
 
 function ServicesSection() {
-  const services = [
-    { icon: <Activity />, title: "Inventory Integrity", desc: "Real-time monitoring of reagents and consumables via IoT-enabled storage." },
-    { icon: <Truck />, title: "Cold-Chain Logistics", desc: "Verified temperature-controlled transit for vaccines and sensitive samples." },
-    { icon: <ShieldCheck />, title: "Compliance Hub", desc: "Automated NAFDAC and ISO documentation for every batch handled." }
-  ];
-
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-3 gap-12">
-        {services.map((s, i) => (
-          <div key={i} className="group">
-            <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-sm">
-              {s.icon}
-            </div>
-            <h3 className="text-xl font-bold mb-3 text-slate-900">{s.title}</h3>
-            <p className="text-slate-500 leading-relaxed text-sm">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// -----------------------------
-// Updated PlatformCapabilities with live metrics
-// -----------------------------
-
-function PlatformCapabilities() {
-  const [metrics, setMetrics] = useState({
-    trackingId: "HLX-2901",
-    escrowStatus: "LOCKED",
-    tempVariation: 0,
-    complianceAlert: ""
-  });
-
-  React.useEffect(() => {
-    const baseTemp = 2.5; // baseline temperature variation in °C
-    const interval = setInterval(() => {
-      const randomTemp = (baseTemp + (Math.random() * 2 - 1)).toFixed(1); // ±1°C fluctuation
-      const showAlert = Math.random() < 0.2; // 20% chance of showing alert
-      setMetrics((prev) => ({
-        ...prev,
-        tempVariation: randomTemp,
-        complianceAlert: showAlert ? "Compliance breach detected" : ""
-      }));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section className="py-24 px-6 bg-slate-900 text-white overflow-hidden relative">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-4xl font-bold mb-8 leading-tight">
-            Infrastructure for the <span className="text-emerald-400">Next Decade</span>
-          </h2>
-          <div className="space-y-6 text-sm">
-            {[
-              { icon: <Database className="text-emerald-400" />, t: "Unified Registry", d: "A single source of truth for all healthcare facilities in the network." },
-              { icon: <Users className="text-emerald-400" />, t: "Vendor Verification", d: "Strict vetting process ensuring only licensed suppliers can trade." },
-              { icon: <AlertCircle className="text-emerald-400" />, t: "Risk Mitigation", d: "AI-driven alerts for potential supply chain disruptions." }
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="mt-1 shrink-0">{item.icon}</div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">{item.t}</h4>
-                  <p className="text-slate-400">{item.d}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="bg-[#0b1120] border border-slate-800 rounded-3xl overflow-hidden shadow-2xl p-8 flex flex-col gap-4">
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400 text-xs font-mono">Tracking ID:</span>
-              <span className="text-emerald-400 font-mono font-bold">{metrics.trackingId}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400 text-xs font-mono">Escrow Status:</span>
-              <span className="text-emerald-400 font-mono font-bold">{metrics.escrowStatus}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400 text-xs font-mono">Temp Variation:</span>
-              <span className="text-emerald-400 font-mono font-bold">{metrics.tempVariation}°C</span>
-            </div>
-            {metrics.complianceAlert && (
-              <div className="mt-2 text-red-400 font-bold text-sm">{metrics.complianceAlert}</div>
-            )}
-          </div>
-          <div className="absolute -inset-4 bg-emerald-500/5 blur-3xl -z-10 rounded-full" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MarketplacePreview({ setActiveTab }) {
-  const items = [
-    { category: 'Reagents', vendor: 'GlobalBio Ltd', price: '₦450,000', stock: 'Verified' },
-    { category: 'Calibration', vendor: 'StandardMetrics', price: '₦120,000', stock: 'Licensed' },
-    { category: 'Cold-Chain', vendor: 'FrozenRoute', price: 'Varies', stock: 'Certified' },
-  ];
-
-  return (
-    <section className="py-24 px-6 bg-slate-50">
+    <section className="relative px-6 py-16 border-y border-white/5 bg-[#031225]/95">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900">Verified Marketplace</h2>
-            <p className="text-slate-500 mt-2 text-sm">Certified procurement for modern facilities.</p>
-          </div>
-          <Button variant="ghost" onClick={() => setActiveTab("marketplace")} className="text-emerald-600 font-bold">
-            Browse All <ChevronRight size={16} />
-          </Button>
+        <div className="text-center mb-12">
+          <p className="text-emerald-400 text-sm font-black tracking-wide uppercase mb-3">Our Core Services</p>
+          <h2 className="text-3xl md:text-4xl font-black">Solutions That Power Healthcare Excellence</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {items.map((item, i) => (
-            <Card key={i} className="hover:shadow-xl transition-all duration-300 border-none shadow-sm shadow-slate-200">
-              <CardContent className="p-8">
-                <div className="p-3 bg-emerald-50 w-fit rounded-xl text-emerald-600 mb-6">
-                  <Store size={24} />
-                </div>
-                <h3 className="font-bold text-xl mb-1">{item.category}</h3>
-                <p className="text-xs text-slate-500 mb-6 font-medium">Vendor: {item.vendor}</p>
-                <div className="pt-6 border-t flex justify-between items-center">
-                  <span className="font-black text-emerald-700">{item.price}</span>
-                  <span className="text-[10px] font-black bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full uppercase">
-                    {item.stock}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
+        <div className="grid lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <article key={service.title} className="rounded-2xl border border-blue-200/15 bg-[#06162b]/80 p-8 shadow-2xl shadow-slate-950/20 hover:border-emerald-400/40 transition-colors">
+              <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-7 shadow-lg`}>
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+              <p className="text-slate-300 text-sm leading-relaxed mb-7">{service.description}</p>
+              <button className="text-emerald-400 font-bold text-sm flex items-center gap-3 hover:text-emerald-300">
+                Learn More <ArrowRight size={17} />
+              </button>
+            </article>
           ))}
         </div>
       </div>
@@ -219,42 +171,70 @@ function MarketplacePreview({ setActiveTab }) {
   );
 }
 
-function InvestorSection() {
+function TrustSection() {
   return (
-    <section className="py-24 px-6 border-y border-slate-100 bg-white">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-        <div className="max-w-xl">
-          <h2 className="text-3xl font-bold mb-4 tracking-tight">Building a Scalable Health Economy</h2>
-          <p className="text-slate-500 italic leading-relaxed text-sm">
-            "HealthLogix isn't just a logistics tool; it's the financial and operational bedrock for high-integrity healthcare delivery in emerging markets."
-          </p>
+    <section className="relative px-6 py-20 bg-[#020b18]">
+      <NetworkBackground />
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[0.85fr_1fr] gap-12 items-center">
+        <div>
+          <p className="text-emerald-400 text-sm font-black tracking-wide uppercase mb-4">Why Choose Us</p>
+          <h2 className="text-3xl md:text-4xl font-black leading-tight mb-8">
+            Why Healthcare Organizations Trust <span className="text-emerald-400">Health Logix</span>
+          </h2>
+          <div className="space-y-7">
+            {trustPoints.map((point) => (
+              <div key={point.title} className="flex gap-5">
+                <div className="h-12 w-12 rounded-full border-2 border-emerald-400/70 flex items-center justify-center text-emerald-400 shrink-0">
+                  <CheckCircle2 size={25} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg mb-2">{point.title}</h3>
+                  <p className="text-slate-300 leading-relaxed text-sm">{point.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-2 gap-12 text-center">
-          <div>
-            <div className="text-4xl font-black text-emerald-600 tracking-tighter">₦2.4B</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Addressable Market</div>
-          </div>
-          <div>
-            <div className="text-4xl font-black text-emerald-600 tracking-tighter">85%</div>
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Retention Rate</div>
-          </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          {impactMetrics.map((metric) => (
+            <div key={metric.title} className="rounded-xl border border-blue-200/15 bg-[#07172c]/85 p-7 shadow-2xl shadow-slate-950/20">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-emerald-400">{metric.icon}</span>
+                <h3 className="font-semibold text-lg">{metric.title}</h3>
+              </div>
+              <div className={`text-5xl font-black mb-3 ${metric.tone}`}>{metric.value}</div>
+              <p className="text-slate-300">{metric.detail}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function CTASection() {
+function CallToAction({ setActiveTab }) {
   return (
-    <section className="py-24 px-6 bg-emerald-600 text-white text-center">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-bold mb-6 tracking-tight">Ready to secure your supply chain?</h2>
-        <p className="text-emerald-100 mb-10 text-lg opacity-90 font-medium">
-          Join 140+ hospitals and vendors already optimized by HealthLogix.
-        </p>
-        <Button variant="secondary" className="px-10 py-5 text-lg rounded-2xl shadow-2xl shadow-emerald-900/20 font-bold">
-          Contact Sales Engineering
-        </Button>
+    <section className="px-6 pb-20 bg-[#020b18]">
+      <div className="max-w-7xl mx-auto overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-cyan-700 to-blue-800 shadow-2xl shadow-blue-950/40">
+        <div className="grid lg:grid-cols-[260px_1fr]">
+          <div className="hidden lg:block relative min-h-44 bg-emerald-400/20">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_35%,rgba(255,255,255,0.35),transparent_18%),linear-gradient(135deg,rgba(2,44,34,0.15),rgba(2,6,23,0.55))]" />
+            <Microscope className="absolute left-16 top-12 text-white/50" size={112} />
+          </div>
+          <div className="p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-8 justify-between">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black mb-4">Ready to Modernize Healthcare Monitoring?</h2>
+              <p className="text-emerald-50/90 max-w-2xl leading-relaxed">
+                Deploy available healthcare assurance systems, cold-chain monitoring infrastructure, calibration traceability and ESG intelligence solutions.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+              <Button onClick={() => setActiveTab("contact")} className="bg-[#020b18] hover:bg-slate-950 px-7 py-4 rounded-lg">Schedule Consultation</Button>
+              <Button variant="secondary" onClick={() => setActiveTab("login")} className="px-7 py-4 rounded-lg text-slate-950 hover:bg-white">Request Live Demo</Button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
