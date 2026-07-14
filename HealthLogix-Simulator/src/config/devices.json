@@ -1,0 +1,38 @@
+[
+  {
+    "DeviceId": "HLX-BBR-001",
+    "DeviceName": "Blood Bank Refrigerator 1",
+    "Facility": "HealthLogix Central Hospital",
+    "Asset": "Blood Storage Unit A",
+    "DeviceType": "Blood Bank Refrigerator",
+    "Profile": "freezer",
+    "Enabled": true
+  },
+  {
+    "DeviceId": "HLX-VAC-001",
+    "DeviceName": "Vaccine Refrigerator 1",
+    "Facility": "HealthLogix Central Hospital",
+    "Asset": "Vaccine Storage Unit A",
+    "DeviceType": "Vaccine Refrigerator",
+    "Profile": "freezer",
+    "Enabled": true
+  },
+  {
+    "DeviceId": "HLX-GEN-001",
+    "DeviceName": "Backup Generator 1",
+    "Facility": "HealthLogix Central Hospital",
+    "Asset": "Emergency Power System",
+    "DeviceType": "Generator",
+    "Profile": "generator",
+    "Enabled": true
+  },
+  {
+    "DeviceId": "HLX-HVAC-001",
+    "DeviceName": "HVAC System 1",
+    "Facility": "HealthLogix Central Hospital",
+    "Asset": "Main Ward Climate Control",
+    "DeviceType": "HVAC",
+    "Profile": "hvac",
+    "Enabled": true
+  }
+]
